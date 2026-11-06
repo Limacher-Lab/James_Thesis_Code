@@ -1,0 +1,49 @@
+% Location to export figures
+imgLoc = 'C:\Users\James\OneDrive - University of Calgary\Thesis\Ch3\';
+
+% Load data
+r1 = load("longRun1.mat");
+r2 = load("longRun2.mat");
+r3 = load("longRun3.mat");
+
+% Plot data for thrust axis (x)
+figure()
+hold on
+plot(r1.timeVec,r1.dataCh0,'-xb',DisplayName='Front X R1')
+plot(r1.timeVec,r1.dataCh3,'-ob',DisplayName='Back X R1')
+
+plot(r2.timeVec,r2.dataCh0,'-xr',DisplayName='Front X R2')
+plot(r2.timeVec,r2.dataCh3,'-or',DisplayName='Back X R2')
+
+plot(r3.timeVec,r3.dataCh0,'-xg',DisplayName='Front X R3')
+plot(r3.timeVec,r3.dataCh3,'-og',DisplayName='Back X R3')
+legend('Location','east')
+ylabel('Volts Measured')
+xlabel('Time (s)')
+myExportGraphics(gcf,'driftSingle.eps',imgLoc)
+
+% Plot sum of both sensors
+figure()
+hold on
+% plot(...
+%     r1.timeVec,...
+%     r1.dataCh0+r1.dataCh3,...
+%     '-xb',...
+%     displayname='Combined X Drift R1'...
+%     )
+plot(...
+    r2.timeVec,...
+    r2.dataCh0+r2.dataCh3,...
+    '-xr',...
+    displayname='Raw Combined X Drift R2'...
+    )
+% plot(...
+%     r3.timeVec,...
+%     r3.dataCh0+r3.dataCh3,...
+%     '-xg',...
+%     displayname='Combined X Drift R3'...
+%     )
+legend()
+ylabel('Volts Measured')
+xlabel('Time (s)')
+myExportGraphics(gcf,'driftCombined.eps',imgLoc)
